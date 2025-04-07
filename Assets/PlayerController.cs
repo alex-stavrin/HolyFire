@@ -16,5 +16,8 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
         Debug.Log(moveValue);
+
+        Vector2 lookValue = lookAction.ReadValue<Vector2>();
+        Debug.Log(lookValue);
     }
 }
