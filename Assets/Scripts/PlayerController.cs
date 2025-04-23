@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
 
     private float coyoteTimer;
 
+    public Vector3 lastCheckpoint;
+
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Player/Move");

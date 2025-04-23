@@ -159,7 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 112279873}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerSetup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -566,7 +566,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -1230,6 +1230,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Candle
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 392a60dd2dee9b3408ddc1e288d11df8, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: 392a60dd2dee9b3408ddc1e288d11df8, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1802,7 +1810,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &694091234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1847,7 +1855,7 @@ GameObject:
   - component: {fileID: 746265499}
   - component: {fileID: 746265498}
   - component: {fileID: 746265501}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1948,6 +1956,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   coyoteDelay: 0.2
+  lastCheckpoint: {x: 0, y: 0, z: 0}
 --- !u!1 &848804645
 GameObject:
   m_ObjectHideFlags: 0
@@ -3782,7 +3791,7 @@ GameObject:
   - component: {fileID: 1509435318}
   - component: {fileID: 1509435320}
   - component: {fileID: 1509435319}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3798,7 +3807,7 @@ Transform:
   m_GameObject: {fileID: 1509435317}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.43, z: 0}
+  m_LocalPosition: {x: 0, y: 2.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3844,7 +3853,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -3902,6 +3911,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1588958824}
   - component: {fileID: 1588958825}
+  - component: {fileID: 1588958826}
   m_Layer: 0
   m_Name: Campfire
   m_TagString: Untagged
@@ -3946,6 +3956,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 18.145214, y: 4.319341, z: 11.105816}
   m_Center: {x: 6.767845, y: 1.6596706, z: 0.9601078}
+--- !u!114 &1588958826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588958823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1ccbf17e3116047ba447b2a8dd7e65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpoint: {fileID: 0}
 --- !u!4 &1602662954 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 392a60dd2dee9b3408ddc1e288d11df8, type: 3}
