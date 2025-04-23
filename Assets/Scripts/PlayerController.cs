@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform cameraTransform;
     [SerializeField] float cameraLag = 0.3f;
     [SerializeField] Animator animator;
+    [SerializeField] float additionalGravity = 20f;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] float coyoteDelay = 1f;
 
     private Rigidbody _rigidbody;
     private CapsuleCollider _capsuleCollider;
@@ -26,6 +29,9 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 cameraVelocity;
     private float cameraOffsetZ;
+    private float cameraOffsetY;
+
+    private float coyoteTimer;
 
     void Start()
     {
@@ -38,7 +44,8 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        cameraOffsetZ = Mathf.Abs(cameraTransform.transform.position.z - transform.position.z); 
+        cameraOffsetZ = Mathf.Abs(cameraTransform.transform.position.z - transform.position.z);
+        cameraOffsetY = Mathf.Abs(cameraTransform.transform.position.y - transform.position.y);
     }
 
     void Update()
@@ -58,7 +65,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector3 cameraTargetPosition = new Vector3(transform.position.x, cameraTransform.position.y, transform.position.z - cameraOffsetZ);
+        Vector3 cameraTargetPosition = new Vector3(transform.position.x, transform.position.y + cameraOffsetY, transform.position.z - cameraOffsetZ);
         cameraTransform.position = Vector3.SmoothDamp(cameraTransform.transform.position, cameraTargetPosition, ref cameraVelocity, cameraLag);
     }
 
@@ -79,6 +86,9 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 linearVelocityXZ = new Vector3(_rigidbody.linearVelocity.x, 0, _rigidbody.linearVelocity.z);
             _rigidbody.AddForce(-linearVelocityXZ * airResistance);
+
+            // add some more gravity
+            _rigidbody.AddForce(0, -additionalGravity, 0, ForceMode.Acceleration);
         }
     }
 
@@ -95,15 +105,16 @@ public class PlayerController : MonoBehaviour
     private bool IsGrounded()
     {
         RaycastHit hit;
-        return Physics.Raycast(transform.position, -transform.up, out hit, (_capsuleCollider.height / 2) + 0.2f);
+        return Physics.Raycast(transform.position, -transform.up, out hit, (_capsuleCollider.height / 2) + 0.1f, groundLayer);
     }
 
     private void JumpLogic()
     {
         jumpTimer -= Time.deltaTime;
-
+        coyoteTimer -= Time.deltaTime;
         if (IsGrounded())
         {
+            coyoteTimer = coyoteDelay;
             _rigidbody.linearDamping = defaultLinearDamping;
 
             // default friction stuff
@@ -121,7 +132,7 @@ public class PlayerController : MonoBehaviour
             _capsuleCollider.material.frictionCombine = PhysicsMaterialCombine.Minimum;
         }
 
-        if (jumpAction.IsPressed() && IsGrounded() && jumpTimer <= 0)
+        if (jumpAction.IsPressed() && coyoteTimer >= 0 && jumpTimer <= 0)
         {
             jumpTimer = jumpCooldown;
             _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, 0, _rigidbody.linearVelocity.z);

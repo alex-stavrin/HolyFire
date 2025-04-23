@@ -6,7 +6,8 @@ public class LitCandle : MonoBehaviour
     [SerializeField] Light pointLight;
     [SerializeField] MeshRenderer meshRenderer;
     [SerializeField] AudioSource audioSource;
-    [SerializeField] UnityEvent litEvent;
+    [SerializeField] CandleManager manager;
+
 
     bool isLit = false;
 
@@ -25,7 +26,7 @@ public class LitCandle : MonoBehaviour
 
             audioSource.Play();
 
-            litEvent.Invoke();
+            manager.CandleLit();
         }
     }
 }
