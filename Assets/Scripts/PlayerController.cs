@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
         cameraOffsetZ = Mathf.Abs(cameraTransform.transform.position.z - transform.position.z);
         cameraOffsetY = Mathf.Abs(cameraTransform.transform.position.y - transform.position.y);
+
+        lastCheckpoint = transform.position;
     }
 
     void Update()
@@ -140,5 +142,11 @@ public class PlayerController : MonoBehaviour
             _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, 0, _rigidbody.linearVelocity.z);
             _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
+    }
+
+    public void GoToCheckpoint()
+    {
+        _rigidbody.position = lastCheckpoint;
+        _rigidbody.linearVelocity = Vector3.zero;
     }
 }
