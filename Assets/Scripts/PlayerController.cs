@@ -149,4 +149,10 @@ public class PlayerController : MonoBehaviour
         _rigidbody.position = lastCheckpoint;
         _rigidbody.linearVelocity = Vector3.zero;
     }
+
+    public void Bounce(float bounceForce)
+    {
+        _rigidbody.linearVelocity = new Vector3(_rigidbody.linearVelocity.x, 0, _rigidbody.linearVelocity.z);
+        _rigidbody.AddForce(Vector3.up * bounceForce, ForceMode.Impulse);
+    }
 }
