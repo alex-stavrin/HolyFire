@@ -3,6 +3,7 @@ using UnityEngine;
 public class BouncePad : MonoBehaviour
 {
     [SerializeField] float bounceForce;
+    [SerializeField] AudioSource bounceSound;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,6 +13,7 @@ public class BouncePad : MonoBehaviour
             if(playerController)
             {
                 playerController.Bounce(bounceForce);
+                bounceSound.Play();
             }
         }
     }
