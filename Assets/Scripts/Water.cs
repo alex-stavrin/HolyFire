@@ -12,5 +12,14 @@ public class Water : MonoBehaviour
                 playerController.GoToCheckpoint();
             }
         }
+
+        if (other.tag == "Egg")
+        {
+            Egg egg = other.GetComponent<Egg>();
+            if (egg)
+            {
+                egg.Respawn();
+            }
+        }
     }
 }
