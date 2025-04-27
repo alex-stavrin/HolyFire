@@ -2,15 +2,35 @@ using UnityEngine;
 
 public class EggPlatform : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] CandleManager candleManager;
+    [SerializeField] EggColor color;
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if(other.tag == "Egg")
+        {
+            Egg egg = other.GetComponent<Egg>();
+            if(egg)
+            {
+                if(egg.color == color)
+                {
+                    candleManager.CandleLit();
+                }
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        if (other.tag == "Egg")
+        {
+            Egg egg = other.GetComponent<Egg>();
+            if (egg)
+            {
+                if (egg.color == color)
+                {
+                    candleManager.CandleUnlit();
+                }
+            }
+        }
     }
 }

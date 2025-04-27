@@ -20,10 +20,19 @@ public class Bridge : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, endPosition, raiseSpeed * Time.deltaTime);
         }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, start.position, raiseSpeed * Time.deltaTime);
+        }
     }
 
     public void Raise()
     {
         risen = true;
+    }
+
+    public void Lower()
+    {
+        risen = false;
     }
 }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7869251156002249457}
   - component: {fileID: 7361796025811102305}
   - component: {fileID: 7855117614119996938}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bouncepad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,6 +124,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounceForce: 1500
   bounceSound: {fileID: 7855117614119996938}
+  activeMaterial: {fileID: 2100000, guid: 54678a70090e7694db7e4acaf53f85cc, type: 2}
+  inactiveMaterial: {fileID: 2100000, guid: 49528feefad3131448622062ca4e10a5, type: 2}
+  isActive: 1
 --- !u!82 &7855117614119996938
 AudioSource:
   m_ObjectHideFlags: 0
