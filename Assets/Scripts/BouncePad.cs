@@ -18,10 +18,12 @@ public class BouncePad : MonoBehaviour
         if(isActive)
         {
             filter.material = activeMaterial;
+            gameObject.layer = LayerMask.NameToLayer("Bounce");
         }
         else
         {
             filter.material = inactiveMaterial;
+            gameObject.layer = LayerMask.NameToLayer("Ground");
         }
     }
 
@@ -38,6 +40,15 @@ public class BouncePad : MonoBehaviour
                     bounceSound.Play();
                 }
             }
+            else if(other.tag == "Egg")
+            {
+                Rigidbody rigidbody = other.GetComponent<Rigidbody>();
+                if(rigidbody)
+                {
+                    rigidbody.AddForce(Vector3.up * bounceForce / 3, ForceMode.Impulse);
+                    bounceSound.Play();
+                }
+            }
         }
     }
 
@@ -47,6 +58,7 @@ public class BouncePad : MonoBehaviour
         {
             isActive = true;
             filter.material = activeMaterial;
+            gameObject.layer = LayerMask.NameToLayer("Bounce");
         }
     }
 }
