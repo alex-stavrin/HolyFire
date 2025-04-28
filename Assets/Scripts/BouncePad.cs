@@ -7,6 +7,7 @@ public class BouncePad : MonoBehaviour
 
     [SerializeField] Material activeMaterial;
     [SerializeField] Material inactiveMaterial;
+    [SerializeField] float eggDivider = 4.5f;
 
     public bool isActive = true;
 
@@ -45,7 +46,8 @@ public class BouncePad : MonoBehaviour
                 Rigidbody rigidbody = other.GetComponent<Rigidbody>();
                 if(rigidbody)
                 {
-                    rigidbody.AddForce(Vector3.up * bounceForce / 3, ForceMode.Impulse);
+                    rigidbody.linearVelocity = new Vector3(rigidbody.linearVelocity.x, 0, rigidbody.linearVelocity.z);
+                    rigidbody.AddForce(Vector3.up * bounceForce / eggDivider, ForceMode.Impulse);
                     bounceSound.Play();
                 }
             }
