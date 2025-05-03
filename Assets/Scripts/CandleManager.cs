@@ -6,6 +6,7 @@ public class CandleManager : MonoBehaviour
     [SerializeField] UnityEvent[] litEvents;
     [SerializeField] UnityEvent[] unlitEvents;
     [SerializeField] int maxCandles = 1;
+    [SerializeField] AudioSource successSound;
 
     int currentCandles = 0;
 
@@ -17,6 +18,7 @@ public class CandleManager : MonoBehaviour
             foreach(UnityEvent litEvent in litEvents)
             {
                 litEvent.Invoke();
+                successSound.Play();
             }
         }
     }

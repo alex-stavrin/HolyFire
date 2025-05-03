@@ -23,6 +23,7 @@ public class CameraManager : MonoBehaviour
     int currentPoint = 0;
     bool playingIntro = false;
     bool fading = false;
+    bool fadeReverse = false;
 
     float currentIntroSpeed = 0;
 
@@ -72,6 +73,18 @@ public class CameraManager : MonoBehaviour
             }
         }
 
+        if (fadeReverse)
+        {
+            if (fadeTimer < fadeDuration)
+            {
+                fadeTimer += Time.deltaTime;
+
+                float alpha = Mathf.Lerp(0, 1, fadeTimer / fadeDuration);
+                fade.color = new Color(0, 0, 0, alpha);
+                goalText.color = new Color(1, 1, 1, alpha);
+            }
+        }
+
         if (!playingIntro || points.Length <= 0) return;
 
         if(currentIntroSpeed < maxIntroSpeed)
@@ -89,15 +102,24 @@ public class CameraManager : MonoBehaviour
             if (currentPoint >= points.Length)
             {
                 playingIntro = false;
-                EndCinematic();
+                StartCoroutine(EndCinematic());
             }
         }
     }
 
-    void EndCinematic()
+    IEnumerator EndCinematic()
     {
+        goalText.gameObject.SetActive(false);
+        fading = false;
+        fadeTimer = 0;
+        fadeReverse = true;
         introCamera.SetActive(false);
         playerCamera.SetActive(true);
+        yield return new WaitForSeconds(fadeDuration + 1f);
+        fadeReverse = false;
+        fadeTimer = 0;
+        fading = true;
+        yield return new WaitForSeconds(fadeDuration);
         playerController.enabled = true;
     }
 }

@@ -7,6 +7,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] Transform spawnPoint;
     [SerializeField] float projectileSpeed;
     [SerializeField] float projectileLifetime;
+    [SerializeField] AudioSource audioSource;
 
     IEnumerator Spawn()
     {
@@ -22,6 +23,7 @@ public class Cannon : MonoBehaviour
                 Projectile projectile = gameobject.GetComponent<Projectile>();
                 if(projectile)
                 {
+                    audioSource.Play();
                     projectile.SetValues(projectileSpeed, projectileLifetime);
                     StartCoroutine(projectile.Disolve());
                 }
@@ -33,6 +35,8 @@ public class Cannon : MonoBehaviour
     void Start()
     {
         StartCoroutine(Spawn());
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnDrawGizmos()
